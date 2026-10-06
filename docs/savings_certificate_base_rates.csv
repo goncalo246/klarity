@@ -1,0 +1,27 @@
+# Taxas base mensais dos certificados de aforro, por série, em pontos base (250 = 2,50%).
+# Fonte a usar: comunicados mensais do IGCP. A taxa de um mês aplica-se aos trimestres que começam nesse mês.
+# Meses ausentes fazem a app usar a última taxa conhecida e marcar o valor como estimativa.
+#
+# ATENÇÃO: os valores abaixo ainda não foram confirmados linha a linha no IGCP. Foram preenchidos com o teto
+# de 2,50% da série F porque a média da Euribor a 3 meses esteve acima desse valor durante todo o período.
+# Confirmar e completar 2025 em diante.
+series,year,month,rate_bps
+F,2023,6,250
+F,2023,7,250
+F,2023,8,250
+F,2023,9,250
+F,2023,10,250
+F,2023,11,250
+F,2023,12,250
+F,2024,1,250
+F,2024,2,250
+F,2024,3,250
+F,2024,4,250
+F,2024,5,250
+F,2024,6,250
+F,2024,7,250
+F,2024,8,250
+F,2024,9,250
+F,2024,10,250
+F,2024,11,250
+F,2024,12,250
