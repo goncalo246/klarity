@@ -18,6 +18,7 @@ on:
     # As páginas legais (docs/*.html) publicam-se logo que mudam, sem esperar pela recolha da noite.
     paths:
       - "docs/*.html"
+      - "docs/*.csv"
       - "tools/quotes/catalog_source.csv"
   workflow_dispatch:
 
@@ -52,9 +53,10 @@ jobs:
         env:
           PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: |
-          # As páginas legais vêm de docs/; os CSV juntam-se-lhes na mesma publicação.
+          # As páginas legais e a tabela de taxas base dos certificados vêm de docs/; os CSV das cotações juntam-se-lhes.
           mkdir -p site
-          cp docs/privacy-policy.html docs/terms.html site/ 2>/dev/null || echo "sem páginas legais em docs/"
+          cp docs/*.html site/ 2>/dev/null || echo "sem páginas legais em docs/"
+          cp docs/*.csv site/ 2>/dev/null || echo "sem CSV em docs/"
           for f in catalog.csv quotes.csv fx.csv; do
             curl --fail --silent --show-error --location "$PAGES_URL/$f" --output "site/$f" \
               || echo "sem $f publicado ainda; começa do zero"
