@@ -1,0 +1,53 @@
+# Catálogo de ativos com cotação automática na Klarity. Mantido à mão; lido por klarity_quotes.py.
+#
+# key       títulos: ISIN.BOLSA (código MIC). Criptomoedas: identificador do CoinGecko.
+# type      ETF, STOCK ou CRYPTO
+# ticker    o que a app mostra e pesquisa
+# aliases   outros tickers do mesmo fundo noutras bolsas, separados por espaços (só para a pesquisa)
+# exchange  código MIC da bolsa desta listagem; vazio nas criptomoedas
+# currency  moeda desta listagem: EUR ou USD. Qualquer outra (GBp incluído) é rejeitada.
+# provider  finnhub, coingecko, ou vazio (o ativo fica no catálogo, com cotação manual na app)
+# symbol    o símbolo do ativo no fornecedor
+# name      sem vírgulas
+#
+# Uma listagem por ISIN: a de euros quando existe. ISIN e ticker confirmados no OpenFIGI a 2026-10-01.
+key,type,ticker,aliases,exchange,currency,provider,symbol,name
+
+# ETFs UCITS: sem fornecedor gratuito confirmado; ficam manuais até haver um.
+IE00BK5BQT80.XETR,ETF,VWCE,VWRA,XETR,EUR,,,Vanguard FTSE All-World (Acc)
+IE00B3RBWM25.XAMS,ETF,VWRL,VGWL,XAMS,EUR,,,Vanguard FTSE All-World (Dist)
+IE00B4L5Y983.XAMS,ETF,IWDA,EUNL SWDA,XAMS,EUR,,,iShares Core MSCI World (Acc)
+IE00BFY0GT14.XAMS,ETF,SWRD,SPPW,XAMS,EUR,,,SPDR MSCI World (Acc)
+IE00BFMXXD54.XETR,ETF,VUAA,,XETR,EUR,,,Vanguard S&P 500 (Acc)
+IE00B5BMR087.XETR,ETF,SXR8,CSPX CSSPX,XETR,EUR,,,iShares Core S&P 500 (Acc)
+IE0032077012.XETR,ETF,EQQQ,,XETR,EUR,,,Invesco EQQQ Nasdaq-100 (Dist)
+IE00BDBRDM35.XAMS,ETF,AGGH,EUNA,XAMS,EUR,,,iShares Core Global Aggregate Bond EUR Hedged (Acc)
+
+# Ações e ETFs dos EUA
+US0378331005.XNAS,STOCK,AAPL,,XNAS,USD,finnhub,AAPL,Apple
+US5949181045.XNAS,STOCK,MSFT,,XNAS,USD,finnhub,MSFT,Microsoft
+US67066G1040.XNAS,STOCK,NVDA,,XNAS,USD,finnhub,NVDA,Nvidia
+US0231351067.XNAS,STOCK,AMZN,,XNAS,USD,finnhub,AMZN,Amazon
+US02079K3059.XNAS,STOCK,GOOGL,,XNAS,USD,finnhub,GOOGL,Alphabet (classe A)
+US30303M1027.XNAS,STOCK,META,,XNAS,USD,finnhub,META,Meta Platforms
+US88160R1014.XNAS,STOCK,TSLA,,XNAS,USD,finnhub,TSLA,Tesla
+US0846707026.XNYS,STOCK,BRK.B,,XNYS,USD,finnhub,BRK.B,Berkshire Hathaway (classe B)
+US46625H1005.XNYS,STOCK,JPM,,XNYS,USD,finnhub,JPM,JPMorgan Chase
+US92826C8394.XNYS,STOCK,V,,XNYS,USD,finnhub,V,Visa
+US1912161007.XNYS,STOCK,KO,,XNYS,USD,finnhub,KO,Coca-Cola
+US4781601046.XNYS,STOCK,JNJ,,XNYS,USD,finnhub,JNJ,Johnson & Johnson
+US9229083632.ARCX,ETF,VOO,,ARCX,USD,finnhub,VOO,Vanguard S&P 500 ETF
+US46090E1038.XNAS,ETF,QQQ,,XNAS,USD,finnhub,QQQ,Invesco QQQ
+US78462F1030.ARCX,ETF,SPY,,ARCX,USD,finnhub,SPY,SPDR S&P 500 ETF
+
+# Criptomoedas, cotadas em euros
+bitcoin,CRYPTO,BTC,,,EUR,coingecko,bitcoin,Bitcoin
+ethereum,CRYPTO,ETH,,,EUR,coingecko,ethereum,Ethereum
+solana,CRYPTO,SOL,,,EUR,coingecko,solana,Solana
+ripple,CRYPTO,XRP,,,EUR,coingecko,ripple,XRP
+cardano,CRYPTO,ADA,,,EUR,coingecko,cardano,Cardano
+dogecoin,CRYPTO,DOGE,,,EUR,coingecko,dogecoin,Dogecoin
+polkadot,CRYPTO,DOT,,,EUR,coingecko,polkadot,Polkadot
+chainlink,CRYPTO,LINK,,,EUR,coingecko,chainlink,Chainlink
+litecoin,CRYPTO,LTC,,,EUR,coingecko,litecoin,Litecoin
+binancecoin,CRYPTO,BNB,,,EUR,coingecko,binancecoin,BNB
