@@ -4,6 +4,10 @@
 # Funciona tanto com o projeto inteiro no repositório como com um repositório só com a pasta tools/quotes
 # (o passo "Encontrar o script" procura o ficheiro onde estiver). Instruções em tools/quotes/README.md.
 #
+# Guarda também, em historico/ no próprio repositório, cópias datadas das cotações e do câmbio
+# (cotacoes-AAAA-MM-DD.csv, cambios-AAAA-MM-DD.csv) e publica-as todas: as Pages substituem o site inteiro em
+# cada publicação, por isso o histórico só acumula se ficar guardado no repositório.
+#
 # Antes de correr, descarrega os ficheiros já publicados: o script usa-os para manter a cotação anterior
 # quando um fornecedor falha (carry-forward). Se o catálogo estiver inválido o script sai com código 1 e a
 # publicação anterior fica como está.
@@ -23,7 +27,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  # write: para guardar as cópias datadas em historico/
+  contents: write
   pages: write
   id-token: write
 
@@ -66,6 +71,26 @@ jobs:
         env:
           FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}
         run: python "${{ steps.script.outputs.path }}" --source "${{ steps.script.outputs.dir }}/catalog_source.csv" --out site
+
+      - name: Guardar as cópias datadas (histórico)
+        run: |
+          dia="$(date -u +%F)"
+          mkdir -p historico
+          cp site/quotes.csv "historico/cotacoes-$dia.csv"
+          cp site/fx.csv "historico/cambios-$dia.csv"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add historico
+          if git diff --cached --quiet; then
+            echo "cópias de $dia sem alterações"
+          else
+            git commit --quiet -m "Histórico de cotações: $dia"
+            git pull --rebase --quiet
+            git push --quiet
+          fi
+          # Todas as cópias guardadas vão para a publicação, ao lado dos ficheiros de nome fixo.
+          cp historico/*.csv site/
+          echo "histórico publicado: $(ls historico | wc -l) ficheiros"
 
       - name: Mostrar o que vai ser publicado
         run: |
